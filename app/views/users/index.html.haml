@@ -1,0 +1,5 @@
+USERS
+#users
+  - @users.each do |u|
+    = link_to "#{u.username}", show_user_path(:id => u.id)
+    %br

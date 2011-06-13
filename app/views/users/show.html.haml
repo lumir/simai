@@ -1,0 +1,8 @@
+#user
+  Username:
+  = @user.username
+  %br
+  Email:
+  = @user.email
+
+  = link_to "Edit", edit_user_path(:id => @user.id)
