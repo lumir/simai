@@ -1,0 +1,2 @@
+- form_for @user, :url => new_user_path, :html => {:multipart => true, :id => "add_user"} do |f|
+  = render :partial => "form", :locals => { :f => f, :user => @user }    

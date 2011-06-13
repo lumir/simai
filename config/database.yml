@@ -1,0 +1,11 @@
+development: &development
+  host: localhost
+  adapter: postgresql
+  database: simai_development
+  encoding: utf8
+  pool: 5
+  username: postgres
+
+test:
+  database: simai_test
+  <<: *development
