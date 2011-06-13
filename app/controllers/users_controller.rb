@@ -10,9 +10,7 @@ class UsersController < ApplicationController
     def create
       @user = User.new(params[:user])
       @user.username = params[:user][:username]
-      p @user
       val_conf = @user.validate_confirmation(params[:confirmation])
-      p val_conf
       if @user.valid? and val_conf
         @user.save
         flash[:notice] = "User added successfully"
