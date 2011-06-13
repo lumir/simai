@@ -1,18 +1,17 @@
-= f.label :username, "Username"
-= f.text_field :username
-%br
-= f.label :email, "Email"
-= f.text_field :email
-%br
-= f.label :username, "Password"
-= f.text_field :password
-%br
-= f.label 'confirmation', "Confirmation Password"
-= text_field_tag 'confirmation'
-%br
-
-%a{:href => "#", :onclick => "validate_confirmation_password();"}
-  Add
+#form
+  = f.label :username, "Username"
+  = f.text_field :username
+  %br
+  = f.label :email, "Email"
+  = f.text_field :email
+  %br
+  = f.label :username, "Password"
+  = f.password_field :password
+  %br
+  = f.label :confirmation, "Confirmation Password"
+  = password_field_tag 'confirmation'
+  %br
+  =f.submit
 
 
 
