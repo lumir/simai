@@ -44,4 +44,15 @@ class UsersController < ApplicationController
         render :action => 'edit'
       end
     end
+
+    def destroy
+      @user = User.find(params[:id])
+      @id = @user.id
+      if @user.destroy
+        flash[:notice] = "User deleted successfully"
+        respond_to do |wants|
+          wants.js
+        end
+      end
+    end
 end

@@ -1,5 +1,7 @@
 USERS
 #users
   - @users.each do |u|
-    = link_to "#{u.username}", show_user_path(:id => u.id)
-    %br
+    %div{:id => "user_#{u.id}"}
+      = link_to "#{u.username}", show_user_path(:id => u.id)
+      %br
+      %a{:onclick => "jConfirm('Delete #{u.username}, from SIMAI?', 'Simai',function(r){remove_user(r,'#{u.id}');});return false"} Delete

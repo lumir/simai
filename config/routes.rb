@@ -7,4 +7,5 @@ Simai::Application.routes.draw do
   match "/users/new" => "users#new", :as => :new_user
   match "/users/:id/edit" => "users#edit", :as => :edit_user
   match "/users/:id/update" => "users#update", :as => :update_user
+  match "/users/:id/destroy" => "users#destroy", :as => :destroy_user
 end
