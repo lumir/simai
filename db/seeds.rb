@@ -7,7 +7,7 @@
 #   Mayor.create(:name => 'Daley', :city => cities.first)
 
 #CREATE USER ROLES
-roles = ["Admin"]
+roles = ["Admin","Plant Boss","Maintainance Boss", "Operator"]
 roles.each do |title|
   r = Role.new(:title => title)
   r.save
@@ -20,11 +20,11 @@ role_admin = Role.find_by_title("Admin")
 default_admin = User.find_or_initialize_by_email(
   :email => "simai@simai.com",
   :password => "holanda1")
-default_admin.username = "simaiadmin"  
+default_admin.username = "simaiadmin"
 default_admin.role_id = role_admin.id
 if default_admin.save!
   p "Admin generated successfully"
 else
-  p "Something was wgron creating admin"
+  p "Something was wrong creating admin"
 end
 

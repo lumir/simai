@@ -4,5 +4,8 @@
   %br
   Email:
   = @user.email
-
+  %br
+  Role:
+  = @user.role.title
+  %br
   = link_to "Edit", edit_user_path(:id => @user.id)

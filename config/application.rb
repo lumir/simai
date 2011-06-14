@@ -37,6 +37,8 @@ module Simai
     config.encoding = "utf-8"
 
     # Configure sensitive parameters which will be filtered from the log file.
+    config.autoload_paths += Dir["#{Rails.root.to_s}/app/controllers/**/"]
+
     config.filter_parameters += [:password]
   end
 end

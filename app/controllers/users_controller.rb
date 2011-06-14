@@ -1,11 +1,17 @@
 class UsersController < ApplicationController
-    before_filter :authenticate_user!
+    before_filter do
+      authorization_required(current_user)
+      #:authenticate_user!
+    end
+
+
     def index
       @users = User.all
     end
 
     def new
       @user = User.new(:confirmation => "")
+      @roles = Role.all.collect {|role| [role.title, role.id]}
     end
 
     def show
@@ -15,6 +21,7 @@ class UsersController < ApplicationController
     def create
       @user = User.new(params[:user])
       @user.username = params[:user][:username]
+      @user.role_id = params[:user][:role_id]
       val_conf = @user.validate_confirmation(params[:confirmation])
       if @user.valid? and val_conf
         @user.save

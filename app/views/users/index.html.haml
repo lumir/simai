@@ -1,7 +1,25 @@
 USERS
 #users
-  - @users.each do |u|
-    %div{:id => "user_#{u.id}"}
-      = link_to "#{u.username}", show_user_path(:id => u.id)
-      %br
-      %a{:onclick => "jConfirm('Delete #{u.username}, from SIMAI?', 'Simai',function(r){remove_user(r,'#{u.id}');});return false"} Delete
+  %table{:border => 1}
+    %th
+      Username
+      %td
+        Email
+      %td
+        Role
+      %td
+
+    - @users.each do |u|
+      %tr
+        %td{:id => "user_#{u.id}"}
+          = link_to "#{u.username}", show_user_path(:id => u.id)
+        %td
+          = u.email
+        %td
+          = u.role.title
+        %td
+          %a{:onclick => "jConfirm('Delete #{u.username}, from SIMAI?', 'Simai',function(r){remove_user(r,'#{u.id}');});return false"} Delete
+
+%br
+
+= link_to "Create New User", new_user_path
