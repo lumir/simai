@@ -4,7 +4,6 @@ class UsersController < ApplicationController
       #:authenticate_user!
     end
 
-
     def index
       @users = User.all
     end
@@ -30,6 +29,7 @@ class UsersController < ApplicationController
       else
         flash[:error] = "Error adding the user: #{@user.errors.full_messages.to_sentence}" unless @user.errors.blank?
         flash[:error] = "Error adding the user: Validation password error" if @user.errors.blank?
+        @roles = Role.all.collect {|role| [role.title, role.id]}
         render :action => 'new'
       end
     end

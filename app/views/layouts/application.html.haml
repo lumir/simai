@@ -7,25 +7,73 @@
     = javascript_include_tag "jquery.min", "jquery-ui.min", "application","jquery.form", "jquery.alerts"
     - csrf_meta_tag
   %body
+    #header
+      #logo
+        %h1
+          %a
+            Simai
+          %p
+            designed by Vander Lumir
+        #nav_profile.header_nav_profile
+          - if user_signed_in?
+            .profile_links_wrapper
+              %span
+                = "Hi, #{current_user.email}"
+              %br
+              = link_to("Account Settings", "#")
+              |
+              = link_to "Sign out", destroy_user_session_path
+              |
+              = link_to("Help", "#")
+          - else
+            #{link_to("Sign in", new_user_session_path)}
+            |
+            = link_to("Sign Up", new_user_registration_path)
+          - if user_signed_in?
+            .profile_pic_wrapper
+              = image_tag(gravatar_url_for(current_user.email), :class => "gravatar_bio")
     - if user_signed_in?
-      %span
-        = "Hi, #{current_user.email}"
-      %br
-      = link_to("Account Settings", "#")
-      |
-      = link_to "Sign out", destroy_user_session_path
-      |
-      = link_to("Help", "#")
-    - else
-      #{link_to("Sign in", new_user_session_path)}
-      |
-      = link_to("Sign Up", new_user_registration_path)
-    - if user_signed_in?
-      .profile_pic_wrapper
-        = image_tag(gravatar_url_for(current_user.email), :class => "gravatar_bio")
+      - if current_user.role.title == "Admin"
+        #wrapper
+          #menu
+            %ul
+              %li
+                = link_to "Home", root_path
+              %li
+                = link_to "Users", index_user_path
+              %li
+                = link_to "Job Orders", "#"
+      - else
+        #wrapper
+          #menu
+            %ul
+              %li
+                = link_to "Home User", root_path
+              %li
+                = link_to "Jobs", "#"
+              %li
+                = link_to "no se que mas", "#"
 
-    #flash_container
-      - flash.each do |key, msg|
-        %div{:id => key}= msg
-    = yield
+
+      #search
+    #page
+      #flash_container
+        - flash.each do |key, msg|
+          %div{:id => key}= msg
+      #content
+        = yield
+    #footer-menu
+      %ul
+        %li
+          = link_to "Homepage"
+        %li
+          = link_to "Blog"
+        %li
+          = link_to "About Us"
+        %li
+          = link_to "How it works"
+    #footer
+      %p
+        Copyright (c) 2011 Simai.com. All rights reserved. Design by
+        = link_to "Vander Van Basten", "http://www.facebook.com/vanderbasten"
 

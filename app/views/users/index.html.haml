@@ -1,25 +1,25 @@
 USERS
 #users
-  %table{:border => 1}
+  %table{:class => "stats"}
     %th
       Username
-      %td
-        Email
-      %td
-        Role
-      %td
+    %th
+      Email
+    %th
+      Role
+    %th
 
     - @users.each do |u|
-      %tr
-        %td{:id => "user_#{u.id}"}
-          = link_to "#{u.username}", show_user_path(:id => u.id)
-        %td
-          = u.email
-        %td
-          = u.role.title
-        %td
-          %a{:onclick => "jConfirm('Delete #{u.username}, from SIMAI?', 'Simai',function(r){remove_user(r,'#{u.id}');});return false"} Delete
-
+      - unless u.id == current_user.id
+        %tr
+          %td{:id => "user_#{u.id}"}
+            = link_to "#{u.username}", show_user_path(:id => u.id)
+          %td
+            = u.email
+          %td
+            = u.role.title
+          %td
+            %a{:onclick => "jConfirm('Delete #{u.username}, from SIMAI?', 'Simai',function(r){remove_user(r,'#{u.id}');});return false"} Delete
 %br
-
-= link_to "Create New User", new_user_path
+#green-button
+  = link_to content_tag(:span, "Create User"), new_user_path, :class => "green-button pcb"
