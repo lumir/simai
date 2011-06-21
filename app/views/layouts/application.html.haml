@@ -59,7 +59,10 @@
     #page
       #flash_container
         - flash.each do |key, msg|
-          %div{:id => key}= msg
+          %div{:id => key, :class => "#{key} fix_flash"}
+            &nbsp
+            = msg
+
       #content
         = yield
     #footer-menu
