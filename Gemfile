@@ -5,8 +5,9 @@ gem 'devise'
 gem 'haml'
 gem 'pg'
 gem 'rake', '0.9.1'
-group :development do
+gem 'heroku'
 
+group :development do
   gem 'annotate', '2.4.0'
   gem 'ruby-debug', '0.10.4'
 end

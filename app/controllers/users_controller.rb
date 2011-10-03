@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+   before_filter :all_roles, :only => [:create, :update, :edit]
+   before_filter :find_user, :only => [:update, :edit, :show, :destroy]
     before_filter do
       authorization_required(current_user)
       #:authenticate_user!
@@ -14,7 +16,6 @@ class UsersController < ApplicationController
     end
 
     def show
-      @user = User.find(params[:id])
     end
 
     def create
@@ -29,17 +30,14 @@ class UsersController < ApplicationController
       else
         flash[:error] = "Error adding the user: #{@user.errors.full_messages.to_sentence}" unless @user.errors.blank?
         flash[:error] = "Error adding the user: Validation password error" if @user.errors.blank?
-        @roles = Role.all.collect {|role| [role.title, role.id]}
         render :action => 'new'
       end
     end
 
     def edit
-      @user = User.find(params[:id])
     end
 
     def update
-      @user = User.find(params[:id])
       @user.username = params[:user][:username]
       val_conf = params[:user][:password] == params[:confirmation] ? true :  false
       if @user.update_attributes(params[:user]) and val_conf
@@ -53,7 +51,6 @@ class UsersController < ApplicationController
     end
 
     def destroy
-      @user = User.find(params[:id])
       @id = @user.id
       if @user.destroy
         flash[:notice] = "User deleted successfully"
@@ -61,5 +58,15 @@ class UsersController < ApplicationController
           wants.js
         end
       end
+    end
+
+    private
+
+    def all_roles
+        @roles = Role.all.collect {|role| [role.title, role.id]}
+    end
+
+    def find_user
+      @user = User.find(params[:id])
     end
 end
