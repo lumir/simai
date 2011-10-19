@@ -26,7 +26,7 @@ class UsersController < ApplicationController
       if @user.valid? and val_conf
         @user.save
         flash[:notice] = "User added successfully"
-        redirect_to :controller => "home", :action => "index"
+        redirect_to :controller => "users", :action => "index"
       else
         flash[:error] = "Error adding the user: #{@user.errors.full_messages.to_sentence}" unless @user.errors.blank?
         flash[:error] = "Error adding the user: Validation password error" if @user.errors.blank?
@@ -42,7 +42,7 @@ class UsersController < ApplicationController
       val_conf = params[:user][:password] == params[:confirmation] ? true :  false
       if @user.update_attributes(params[:user]) and val_conf
         flash[:notice] = "User updated successfully"
-        redirect_to :controller => "home", :action => "index"
+        redirect_to :controller => "users", :action => "index"
       else
         flash[:error] = "Error adding the user: #{@user.errors.full_messages.to_sentence}" unless @user.errors.blank?
         flash[:error] = "Error adding the user: Validation password error" if @user.errors.blank?
@@ -67,6 +67,6 @@ class UsersController < ApplicationController
     end
 
     def find_user
-      @user = User.find(params[:id])
+       @user = User.find(params[:id])
     end
 end

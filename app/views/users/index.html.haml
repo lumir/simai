@@ -13,7 +13,7 @@ USERS
       - unless u.id == current_user.id
         %tr
           %td{:id => "user_#{u.id}"}
-            = link_to "#{u.username}", show_user_path(:id => u.id)
+            = link_to "#{u.username}", user_path(u)
           %td
             = u.email
           %td

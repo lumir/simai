@@ -1,0 +1,14 @@
+PLANTS
+#plants
+  %table{:class => "stats"}
+    %th
+      Name
+    - @plants.each do |p|
+      %tr
+         %td{:id => "plant_#{p.id}"}
+            = link_to "#{p.name}", show_plant_path(:id => p.id)
+         %td
+            %a{:onclick => "jConfirm('Delete #{p.name}, from SIMAI?', 'Simai',function(r){remove_plant(r,'#{u.id}');});return false"} Delete
+%br
+#green-button
+   = link_to content_tag(:span, "Create Plant"), new_plant_path, :class => "green-button pcb"
